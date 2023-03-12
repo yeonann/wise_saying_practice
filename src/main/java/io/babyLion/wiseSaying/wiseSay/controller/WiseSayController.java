@@ -1,19 +1,17 @@
 package io.babyLion.wiseSaying.wiseSay.controller;
 
+import io.babyLion.wiseSaying.Container;
 import io.babyLion.wiseSaying.WiseSaying;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class WiseSayController {
 
-    private final Scanner sc;
     private int number;
     private List<WiseSaying> wiseSayings;
 
-    public WiseSayController(Scanner sc) {
-        this.sc = sc;
+    public WiseSayController() {
         this.number = 0;
         this.wiseSayings = new ArrayList<>();
     }
@@ -22,9 +20,9 @@ public class WiseSayController {
         int id = number + 1;
 
         System.out.print("명언 : ");
-        String content = sc.nextLine().trim();
+        String content = Container.getSc().nextLine().trim();
         System.out.print("작가 : ");
-        String authorName = sc.nextLine().trim();
+        String authorName = Container.getSc().nextLine().trim();
 
         WiseSaying wiseSaying = new WiseSaying(id, content, authorName);
         wiseSayings.add(wiseSaying);
