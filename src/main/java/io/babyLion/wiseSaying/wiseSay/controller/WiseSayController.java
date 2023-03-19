@@ -49,6 +49,19 @@ public class WiseSayController {
             System.out.println("id는 숫자로 입력해주세요.");
             return;
         }
+
+        WiseSaying wiseSaying = findById(id);
+
+        wiseSayings.remove(wiseSaying);
         System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
+    }
+
+    public WiseSaying findById (int id) {
+        for (WiseSaying wiseSaying : wiseSayings) {
+            if ( wiseSaying.getId() == id ) {
+                return  wiseSaying;
+            }
+        }
+        return null;
     }
 }
