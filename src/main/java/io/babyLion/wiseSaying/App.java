@@ -23,7 +23,7 @@ public class App {
                 break;
                 case "목록" : wiseSayController.list();
                 break;
-                case "삭제" : wiseSayController.remove();
+                case "삭제" : wiseSayController.remove(rq);
             }
         }
     }

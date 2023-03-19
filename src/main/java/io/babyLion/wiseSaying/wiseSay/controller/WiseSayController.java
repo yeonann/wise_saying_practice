@@ -1,6 +1,7 @@
 package io.babyLion.wiseSaying.wiseSay.controller;
 
 import io.babyLion.wiseSaying.Container;
+import io.babyLion.wiseSaying.Rq;
 import io.babyLion.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
@@ -40,7 +41,14 @@ public class WiseSayController {
         }
     }
 
-    public void remove() {
+    public void remove(Rq rq) {
 
+        int id = rq.getParameterIntValue("id", -1);
+
+        if (id == -1) {
+            System.out.println("id는 숫자로 입력해주세요.");
+            return;
+        }
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
     }
 }

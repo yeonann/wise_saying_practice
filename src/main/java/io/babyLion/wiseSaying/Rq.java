@@ -8,8 +8,8 @@ public class Rq {
     private String actionCode;
     private Map<String, String> parameters;
 
-    public Rq (String command) {
-        String[] commandBits = command.split("\\?",2);
+    public Rq(String command) {
+        String[] commandBits = command.split("\\?", 2);
         this.actionCode = commandBits[0];
         this.parameters = new HashMap<>();
 
@@ -19,7 +19,7 @@ public class Rq {
 
         String[] parameterBits = commandBits[1].split("&");
 
-        for ( String parameter : parameterBits) {
+        for (String parameter : parameterBits) {
             String[] parameterBit = parameter.split("=", 2);
             if (parameterBit.length == 1) {
                 continue;
@@ -27,7 +27,7 @@ public class Rq {
 
             String key = parameterBit[0];
             String value = parameterBit[1];
-            parameters.put(key,value);
+            parameters.put(key, value);
         }
     }
 
@@ -41,6 +41,15 @@ public class Rq {
 
     public String getParameterValue(String key) {
         return parameters.get(key);
+    }
+
+    public int getParameterIntValue(String key, int defaultValue) {
+
+        try {
+            return Integer.parseInt(parameters.get(key));
+        } catch (NumberFormatException e) {
+            return defaultValue;
+        }
     }
 
 }
