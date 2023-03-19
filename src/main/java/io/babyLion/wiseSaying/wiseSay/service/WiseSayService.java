@@ -1,52 +1,35 @@
 package io.babyLion.wiseSaying.wiseSay.service;
 
 import io.babyLion.wiseSaying.entity.WiseSaying;
+import io.babyLion.wiseSaying.wiseSay.repository.WiseSayRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WiseSayService {
 
-    private int number;
-    private List<WiseSaying> wiseSayings;
+    private final WiseSayRepository wiseSayRepository;
 
     public WiseSayService() {
-        this.number = 0;
-        this.wiseSayings = new ArrayList<>();
+        this.wiseSayRepository = new WiseSayRepository();
     }
 
-    // 명언을 작성하는 메서드
     public int write(String content, String authorName) {
-        int id = number + 1;
-        WiseSaying wiseSaying = new WiseSaying(id, content, authorName);
-        wiseSayings.add(wiseSaying);
-        number = id;
-        return id;
+        return wiseSayRepository.write(content, authorName);
     }
 
-    // 명언 목록
     public List<WiseSaying> findAll() {
-        return wiseSayings;
+        return wiseSayRepository.findAll();
     }
 
-    // 명언 번호로 찾기
     public WiseSaying findById (int id) {
-        for (WiseSaying wiseSaying : wiseSayings) {
-            if ( wiseSaying.getId() == id ) {
-                return  wiseSaying;
-            }
-        }
-        return null;
+        return wiseSayRepository.findById(id);
     }
 
-    // 명언을 삭제하는 메서드
     public void remove (WiseSaying wiseSaying) {
-        wiseSayings.remove(wiseSaying);
+        wiseSayRepository.remove(wiseSaying);
     }
 
-    // 명언을 수정하는 메서드
     public void update (WiseSaying wiseSaying, String content, String authorName) {
-        wiseSaying.setContent(content);
-        wiseSaying.setAuthorName(authorName);
+        wiseSayRepository.update(wiseSaying, content, authorName);
     }
 }
