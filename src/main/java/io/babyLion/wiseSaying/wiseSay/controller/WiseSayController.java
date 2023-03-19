@@ -3,36 +3,32 @@ package io.babyLion.wiseSaying.wiseSay.controller;
 import io.babyLion.wiseSaying.Container;
 import io.babyLion.wiseSaying.Rq;
 import io.babyLion.wiseSaying.entity.WiseSaying;
+import io.babyLion.wiseSaying.wiseSay.service.WiseSayService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WiseSayController {
 
-    private int number;
-    private List<WiseSaying> wiseSayings;
+    private final WiseSayService wiseSayService;
 
     public WiseSayController() {
-        this.number = 0;
-        this.wiseSayings = new ArrayList<>();
+        this.wiseSayService = new WiseSayService(); // 주입
     }
 
     public void write() {
-        int id = number + 1;
-
         System.out.print("명언 : ");
         String content = Container.getSc().nextLine().trim();
         System.out.print("작가 : ");
         String authorName = Container.getSc().nextLine().trim();
 
-        WiseSaying wiseSaying = new WiseSaying(id, content, authorName);
-        wiseSayings.add(wiseSaying);
-
+        int id = wiseSayService.write(content, authorName);
         System.out.printf("%d번 명언이 등록되었습니다.\n", id);
-        number = id;
     }
 
     public void list() {
+
+        List<WiseSaying> wiseSayings = wiseSayService.findAll();
+
         System.out.println("번호 / 작가 / 명언");
         System.out.println("-".repeat(20));
 
@@ -49,13 +45,13 @@ public class WiseSayController {
             return;
         }
 
-        WiseSaying wiseSaying = findById(id);
+        WiseSaying wiseSaying = wiseSayService.findById(id);
         if ( wiseSaying == null ) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
             return;
         }
 
-        wiseSayings.remove(wiseSaying);
+        wiseSayService.remove(wiseSaying);
         System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
     }
 
@@ -66,7 +62,7 @@ public class WiseSayController {
             System.out.println("id는 숫자로 입력해주세요.");
         }
 
-        WiseSaying wiseSaying = findById(id);
+        WiseSaying wiseSaying = wiseSayService.findById(id);
         if ( wiseSaying == null ) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
             return;
@@ -78,18 +74,8 @@ public class WiseSayController {
         System.out.print("작가 : ");
         String authorName = Container.getSc().nextLine().trim();
 
-        wiseSaying.setContent(content);
-        wiseSaying.setAuthorName(authorName);
+        wiseSayService.update(wiseSaying, content, authorName);
 
         System.out.printf("%d번 명언이 수정되었습니다.\n", id);
-    }
-
-    public WiseSaying findById (int id) {
-        for (WiseSaying wiseSaying : wiseSayings) {
-            if ( wiseSaying.getId() == id ) {
-                return  wiseSaying;
-            }
-        }
-        return null;
     }
 }
