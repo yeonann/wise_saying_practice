@@ -1,4 +1,4 @@
-package io.babyLion.wiseSaying;
+package io.babyLion.wiseSaying.entity;
 
 public class WiseSaying {
 

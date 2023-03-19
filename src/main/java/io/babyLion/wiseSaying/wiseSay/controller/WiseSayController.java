@@ -1,7 +1,7 @@
 package io.babyLion.wiseSaying.wiseSay.controller;
 
 import io.babyLion.wiseSaying.Container;
-import io.babyLion.wiseSaying.WiseSaying;
+import io.babyLion.wiseSaying.entity.WiseSaying;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,5 +38,9 @@ public class WiseSayController {
         for (WiseSaying wiseSaying : wiseSayings) {
             System.out.printf("%d / %s / %s\n", wiseSaying.getId(), wiseSaying.getAuthorName(), wiseSaying.getContent());
         }
+    }
+
+    public void remove() {
+
     }
 }
