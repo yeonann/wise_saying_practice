@@ -44,12 +44,10 @@ public class Rq {
     }
 
     public int getParameterIntValue(String key, int defaultValue) {
-
         try {
             return Integer.parseInt(parameters.get(key));
         } catch (NumberFormatException e) {
             return defaultValue;
         }
     }
-
 }

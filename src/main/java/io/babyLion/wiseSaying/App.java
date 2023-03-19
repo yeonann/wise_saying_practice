@@ -17,13 +17,14 @@ public class App {
             Rq rq = new Rq(command);
 
             switch (rq.getActionCode()) {
-                case "종료" : systemController.exit();
-                return;
-                case "등록" : wiseSayController.write();
-                break;
-                case "목록" : wiseSayController.list();
-                break;
-                case "삭제" : wiseSayController.remove(rq);
+                case "종료" -> {
+                    systemController.exit();
+                    return;
+                }
+                case "등록" -> wiseSayController.write();
+                case "목록" -> wiseSayController.list();
+                case "삭제" -> wiseSayController.remove(rq);
+                case "수정" -> wiseSayController.update(rq);
             }
         }
     }

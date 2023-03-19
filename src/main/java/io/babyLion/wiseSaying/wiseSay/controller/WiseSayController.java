@@ -44,14 +44,12 @@ public class WiseSayController {
     public void remove(Rq rq) {
 
         int id = rq.getParameterIntValue("id", -1);
-
         if (id == -1) {
             System.out.println("id는 숫자로 입력해주세요.");
             return;
         }
 
         WiseSaying wiseSaying = findById(id);
-
         if ( wiseSaying == null ) {
             System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
             return;
@@ -59,6 +57,31 @@ public class WiseSayController {
 
         wiseSayings.remove(wiseSaying);
         System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
+    }
+
+    public void update(Rq rq) {
+
+        int id = rq.getParameterIntValue("id", -1);
+        if (id == -1) {
+            System.out.println("id는 숫자로 입력해주세요.");
+        }
+
+        WiseSaying wiseSaying = findById(id);
+        if ( wiseSaying == null ) {
+            System.out.printf("%d번 명언은 존재하지 않습니다.\n", id);
+            return;
+        }
+        System.out.printf("명언(기존) : %s\n", wiseSaying.getContent());
+        System.out.print("명언 : ");
+        String content = Container.getSc().nextLine().trim();
+        System.out.printf("작가(기존) : %s\n", wiseSaying.getAuthorName());
+        System.out.print("작가 : ");
+        String authorName = Container.getSc().nextLine().trim();
+
+        wiseSaying.setContent(content);
+        wiseSaying.setAuthorName(authorName);
+
+        System.out.printf("%d번 명언이 수정되었습니다.\n", id);
     }
 
     public WiseSaying findById (int id) {
